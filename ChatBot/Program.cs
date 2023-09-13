@@ -11,6 +11,11 @@ internal class Program
         if (botConfig == null)
             return;
 
+
         IChatBot chatBot = new TelegramBot(botConfig);
+        using CancellationTokenSource cts = new();
+        chatBot.Start(cts);
+        Console.ReadLine();
+        cts.Cancel();
     }
 }
