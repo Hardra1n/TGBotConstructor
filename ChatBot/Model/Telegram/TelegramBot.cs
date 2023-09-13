@@ -4,7 +4,7 @@ using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 
-namespace ChatBot.Model;
+namespace ChatBot.Model.Telegram;
 public class TelegramBot : IChatBot
 {
     private TelegramBotClient _client;
@@ -24,6 +24,20 @@ public class TelegramBot : IChatBot
     public async Task SendTextMessage(ReceiverInfo reciever, string text)
     {
         await _client.SendTextMessageAsync(reciever.Id, text);
+    }
+
+    public async Task SetCommands(IBotCommand[] commands)
+    {
+        try
+        {
+            var nativeCommands = commands.Select(cmd => (TelegramBotCommand)cmd);
+            await _client.SetMyCommandsAsync(nativeCommands.Select(cmd => cmd.ToNativeBotCommand()));
+        }
+        catch (Exception ex)
+        {
+            System.Console.WriteLine(ex.Message + "\n Unable to convert IBotCommand to telegram commands");
+            throw;
+        }
     }
 
     public void Start(CancellationTokenSource cts)

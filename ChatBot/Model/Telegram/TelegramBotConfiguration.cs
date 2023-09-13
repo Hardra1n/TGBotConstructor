@@ -1,4 +1,4 @@
-namespace ChatBot.Model;
+namespace ChatBot.Model.Telegram;
 
 public class TelegramBotConfiguration
 {

@@ -1,0 +1,13 @@
+{
+    "Commands": [
+        {
+            "Name": "help",
+            "Description": "Описание команды"
+        },
+        {
+            "Name": "help2",
+            "Description": "Описание2"
+        }
+    ],
+    "Scenarious": {}
+}
