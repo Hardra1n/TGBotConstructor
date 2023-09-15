@@ -17,6 +17,8 @@ internal class Program
         using CancellationTokenSource cts = new();
         chatBot.SetCommands(botCommands);
         chatBot.Start(cts);
+
+        Console.WriteLine("Bot was started");
         Console.ReadLine();
         cts.Cancel();
     }
