@@ -8,5 +8,5 @@ public interface IChatBot
 
     Task SetCommands(IBotCommand[] commands);
 
-    Task SendTextMessage(ReceiverInfo receiverInfo, string text);
+    Task SendTextMessage(ReceiverInfo receiverInfo, string text, bool isReply = false);
 }

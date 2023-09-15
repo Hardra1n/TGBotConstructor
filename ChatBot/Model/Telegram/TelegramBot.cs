@@ -24,9 +24,14 @@ public class TelegramBot : IChatBot
     }
 
 
-    public async Task SendTextMessage(ReceiverInfo reciever, string text)
+    public async Task SendTextMessage(ReceiverInfo reciever, string text, bool isReply = false)
     {
-        await _client.SendTextMessageAsync(reciever.Id, text);
+        int? messageToReply = null;
+        if (isReply)
+        {
+            messageToReply = int.Parse(reciever.MessageId);
+        }
+        await _client.SendTextMessageAsync(reciever.Id, text, replyToMessageId: messageToReply);
     }
 
     public async Task SetCommands(IBotCommand[] commands)

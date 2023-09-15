@@ -51,6 +51,8 @@ public class ActionCreator
             Console.WriteLine("Text Action property in json doesn't contain 'Value' property");
             return null;
         }
-        return new SendTextBotAction(textToWrite);
+
+        bool isReply = jsonNode["Reply"] == null ? false : (bool)jsonNode["Reply"]!.AsValue();
+        return new SendTextBotAction(textToWrite, isReply);
     }
 }
