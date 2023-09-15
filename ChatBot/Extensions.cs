@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using ChatBot.Model.Telegram;
+using Telegram.Bot.Types;
 
 public static class Extensions
 {
@@ -8,7 +9,7 @@ public static class Extensions
     {
         try
         {
-            string jsonConfig = File.ReadAllText("./BotConfiguration.json");
+            string jsonConfig = System.IO.File.ReadAllText("./BotConfiguration.json");
             var botConfig = JsonSerializer.Deserialize<TelegramBotConfiguration>(jsonConfig);
             if (botConfig != null)
                 return botConfig;
@@ -26,12 +27,8 @@ public static class Extensions
     {
         try
         {
-            string jsonCommands = File.ReadAllText("./BotMessages.json");
-            if (jsonCommands == null)
-                throw new NullReferenceException();
+            string jsonCommands = System.IO.File.ReadAllText("./BotMessages.json");
             JsonNode jsonNode = JsonNode.Parse(jsonCommands)!;
-            if (jsonNode == null)
-                throw new NullReferenceException();
             IBotCommand[] botCommands = jsonNode["Commands"].Deserialize<TelegramBotCommand[]>()
                 ?? Array.Empty<IBotCommand>();
             return botCommands;
@@ -39,6 +36,32 @@ public static class Extensions
         catch (Exception ex)
         {
             System.Console.WriteLine($"Unable to convert json to telegram command objects. \n {ex.Message}");
+            throw;
+        }
+    }
+
+    public static IEnumerable<KeyValuePair<string, JsonNode>> GetCommandActionJsonNodePairs()
+    {
+        try
+        {
+            string jsonCommands = System.IO.File.ReadAllText("./BotMessages.json");
+            JsonNode jsonNode = JsonNode.Parse(jsonCommands)!;
+            var commandsNode = jsonNode["Commands"]!.AsArray();
+            List<KeyValuePair<string, JsonNode>> keyValuesList = new();
+            foreach (var node in commandsNode)
+            {
+                string commandName = '/' + node!["Name"]!.AsValue().ToString();
+                JsonNode actionNode = node!["Action"]!;
+                if (actionNode == null)
+                    continue;
+                keyValuesList.Add(KeyValuePair.Create(commandName, actionNode));
+            }
+            return keyValuesList;
+
+        }
+        catch (Exception ex)
+        {
+            System.Console.WriteLine($"Unable to convert json command's action nodes. \n {ex.Message}");
             throw;
         }
     }

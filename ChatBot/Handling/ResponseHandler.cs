@@ -8,22 +8,18 @@ public class ResponseHandler
 {
     private IChatBot _chatBot;
 
-    private Dictionary<string, BotAction> _textHandlers;
+    private IDictionary<string, BotAction> _textHandlers;
 
     public ResponseHandler(IChatBot chatBot)
     {
         _chatBot = chatBot;
-        _textHandlers = new Dictionary<string, BotAction>()
-        {
-            {"/help", new SendTextBotAction("You want to help you?") },
-            {"/help2", new SendTextBotAction("Ah, really?")}
-        };
+        _textHandlers = ActionCreator.GetTextBotActionsDictionary();
     }
 
     public async Task HandleTextMessage(ReceiverInfo receiverInfo, string text)
     {
-        var action = _textHandlers.GetValueOrDefault(text);
-        if (action != null)
+        BotAction? action;
+        if (_textHandlers.TryGetValue(text, out action))
             await action.Execute(_chatBot, receiverInfo);
     }
 }

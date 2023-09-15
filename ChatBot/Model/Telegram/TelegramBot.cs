@@ -9,6 +9,9 @@ public class TelegramBot : IChatBot
 {
     private TelegramBotClient _client;
 
+    private ResponseHandler _handler;
+
+
     public TelegramBot(TelegramBotConfiguration configuration)
     {
         _client = new TelegramBotClient(configuration.Token);
@@ -17,9 +20,9 @@ public class TelegramBot : IChatBot
             _client.SetMyNameAsync(configuration.Name).Wait();
         if (configuration.Description != _client.GetMyDescriptionAsync().Result.Description)
             _client.SetMyDescriptionAsync(configuration.Description).Wait();
+        _handler = new ResponseHandler(this);
     }
 
-    private ResponseHandler Handler => new ResponseHandler(this);
 
     public async Task SendTextMessage(ReceiverInfo reciever, string text)
     {
@@ -66,7 +69,7 @@ public class TelegramBot : IChatBot
     {
         if (update.Message != null && update.Message.Text != null)
         {
-            await Handler.HandleTextMessage(update.Message.ToReceiverInfo(), update.Message.Text);
+            await _handler.HandleTextMessage(update.Message.ToReceiverInfo(), update.Message.Text);
         }
 
         return;

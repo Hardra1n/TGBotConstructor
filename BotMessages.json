@@ -2,11 +2,16 @@
     "Commands": [
         {
             "Name": "help",
-            "Description": "Описание команды"
+            "Description": "Описание команды",
+            "Action": {
+                "Name": "Text",
+                "Value": "Описание которое я буду вам посылать"
+            }
         },
         {
             "Name": "help2",
-            "Description": "Описание2"
+            "Description": "Описание2",
+            "Action": {}
         }
     ],
     "Scenarious": {}
