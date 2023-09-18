@@ -72,6 +72,7 @@ public class TelegramBot : IChatBot
 
     private async Task HandleUpdateAsync(ITelegramBotClient client, Update update, CancellationToken token)
     {
+        // Handling text message
         if (update.Message != null && update.Message.Text != null)
         {
             await _handler.HandleTextMessage(update.Message.ToReceiverInfo(), update.Message.Text);

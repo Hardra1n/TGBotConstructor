@@ -65,4 +65,38 @@ public static class Extensions
             throw;
         }
     }
+
+    public static TelegramAdminRepository GetTelegramAdminRepository()
+    {
+        try
+        {
+            string jsonText = System.IO.File.ReadAllText("./Admins.json");
+            JsonNode jsonNode = JsonNode.Parse(jsonText)!;
+            var adminRepository = jsonNode.Deserialize<TelegramAdminRepository>();
+            if (adminRepository == null)
+                throw new NullReferenceException();
+            return adminRepository;
+        }
+        catch (Exception ex)
+        {
+            System.Console.WriteLine($"Unable to get admin repository from json file. \n {ex.Message}");
+            throw;
+        }
+    }
+
+    public static async Task UpdateTelegramAdminRepository(TelegramAdminRepository adminRepository)
+    {
+
+        try
+        {
+            await using FileStream fileStream = System.IO.File.Create("./Admins.json");
+            await JsonSerializer.SerializeAsync(fileStream, adminRepository);
+
+        }
+        catch (Exception ex)
+        {
+            System.Console.WriteLine($"Unable to add admin member to json. \n {ex.Message}");
+            throw;
+        }
+    }
 }
