@@ -40,6 +40,24 @@
                 "FileId": "AwACAgIAAxkBAANdZQgi5EbbZbQaXNyp4DC70o6HGa0AAhA6AAJaTkFIiaK9ekk-jIkwBA",
                 "Caption": "Текст к войсу"
             }
+        },
+        {
+            "Name": "video",
+            "Description": "Описание6",
+            "Action": {
+                "Name": "Video",
+                "FileId": "BAACAgIAAxkBAANrZQg6AAHnYXjEl7PM9_C4kr9MUMhtAAKhLwACPW3hSE1HX-x2rclrMAQ",
+                "Caption": "Текст к видео"
+            }
+        },
+        {
+            "Name": "videonote",
+            "Description": "Описание7",
+            "Action": {
+                "Name": "VideoNote",
+                "FileId": "DQACAgIAAxkBAANwZQg8e9kdCmJgsSD1LgRN2yWFN8kAAtk5AAJaTklIB3WUSNYGp6gwBA",
+                "Caption": "Текст к войсу"
+            }
         }
     ],
     "Scenarious": {}

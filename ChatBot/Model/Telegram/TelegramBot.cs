@@ -43,6 +43,16 @@ public class TelegramBot : IChatBot
         await _client.SendTextMessageAsync(reciever.Id, text, replyToMessageId: messageToReply);
     }
 
+    public async Task SendVideoMessage(ReceiverInfo receiverInfo, string fileId, string? caption)
+    {
+        await _client.SendVideoAsync(receiverInfo.Id, InputFile.FromFileId(fileId), caption: caption);
+    }
+
+    public async Task SendVideoNoteMessage(ReceiverInfo receiverInfo, string fileId)
+    {
+        await _client.SendVideoNoteAsync(receiverInfo.Id, InputFile.FromFileId(fileId));
+    }
+
     public async Task SendVoiceMessage(ReceiverInfo receiverInfo, string fileId, string? caption)
     {
         await _client.SendVoiceAsync(receiverInfo.Id, InputFile.FromFileId(fileId), caption: caption);
@@ -104,6 +114,11 @@ public class TelegramBot : IChatBot
             if (update.Message.Video != null)
             {
                 await _handler.HandleMediaMessage(update.Message.ToReceiverInfo(), update.Message.Video.FileId);
+                return;
+            }
+            if (update.Message.VideoNote != null)
+            {
+                await _handler.HandleMediaMessage(update.Message.ToReceiverInfo(), update.Message.VideoNote.FileId);
                 return;
             }
 
