@@ -2,19 +2,18 @@ using ChatBot.Model;
 
 namespace ChatBot.Handling.Actions;
 
-public class SendAudioAction : BotAction
+public class SendVoiceAction : BotAction
 {
     private readonly string _fileId;
     private readonly string? _caption;
 
-    public SendAudioAction(string fileId, string? caption)
+    public SendVoiceAction(string fileId, string? caption)
     {
         _fileId = fileId;
         _caption = caption == string.Empty ? null : caption;
     }
-
     public override async Task Execute(IChatBot chatBot, ReceiverInfo receiverInfo)
     {
-        await chatBot.SendAudioMessage(receiverInfo, _fileId, _caption);
+        await chatBot.SendVoiceMessage(receiverInfo, _fileId, _caption);
     }
 }

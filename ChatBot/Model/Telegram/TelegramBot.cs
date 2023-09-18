@@ -43,6 +43,11 @@ public class TelegramBot : IChatBot
         await _client.SendTextMessageAsync(reciever.Id, text, replyToMessageId: messageToReply);
     }
 
+    public async Task SendVoiceMessage(ReceiverInfo receiverInfo, string fileId, string? caption)
+    {
+        await _client.SendVoiceAsync(receiverInfo.Id, InputFile.FromFileId(fileId), caption: caption);
+    }
+
     public async Task SetCommands(IBotCommand[] commands)
     {
         try

@@ -31,6 +31,15 @@
                 "FileId": "CQACAgIAAxkBAANhZQg09doq7vM6DX9C2IJjAAHSuhrXAAK6BQACQjopSnc0dpjw2Mg-MAQ",
                 "Caption": "Текст к аудио"
             }
+        },
+        {
+            "Name": "voice",
+            "Description": "Описание5",
+            "Action": {
+                "Name": "Voice",
+                "FileId": "AwACAgIAAxkBAANdZQgi5EbbZbQaXNyp4DC70o6HGa0AAhA6AAJaTkFIiaK9ekk-jIkwBA",
+                "Caption": "Текст к войсу"
+            }
         }
     ],
     "Scenarious": {}

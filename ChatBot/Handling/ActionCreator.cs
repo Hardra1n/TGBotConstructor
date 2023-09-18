@@ -37,6 +37,9 @@ public class ActionCreator
             case "Audio":
                 botAction = CreateAudioAction(actionNode);
                 break;
+            case "Voice":
+                botAction = CreateVoiceAction(actionNode);
+                break;
             default:
                 botAction = null;
                 break;
@@ -47,6 +50,18 @@ public class ActionCreator
             return null;
         }
         return botAction;
+    }
+
+    private static SendVoiceAction? CreateVoiceAction(JsonNode jsonNode)
+    {
+        string? fileId = jsonNode["FileId"]?.AsValue().ToString();
+        if (fileId == null)
+        {
+            Console.WriteLine("Voice Action property in json doesn't contain 'File Id' property");
+            return null;
+        }
+        string? caption = jsonNode["Caption"]?.AsValue().ToString();
+        return new SendVoiceAction(fileId, caption);
     }
 
     private static SendAudioAction? CreateAudioAction(JsonNode jsonNode)
