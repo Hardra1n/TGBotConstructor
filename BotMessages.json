@@ -13,6 +13,15 @@
             "Name": "help2",
             "Description": "Описание2",
             "Action": {}
+        },
+        {
+            "Name": "photo",
+            "Description": "Описание3",
+            "Action": {
+                "Name": "Photo",
+                "File Id": "AgACAgIAAxkBAANbZQgiQaF6ZXdF9EXOSYc-ZKuStI0AAsPMMRv1QkBIbRRgiamOnEwBAAMCAANzAAMwBA",
+                "Caption": "Текст к фотографии"
+            }
         }
     ],
     "Scenarious": {}

@@ -23,6 +23,10 @@ public class TelegramBot : IChatBot
         _handler = new ResponseHandler(this);
     }
 
+    public async Task SendPhotoMessage(ReceiverInfo receiverInfo, string fileId, string? caption)
+    {
+        await _client.SendPhotoAsync(receiverInfo.Id, InputFile.FromFileId(fileId), caption: caption);
+    }
 
     public async Task SendTextMessage(ReceiverInfo reciever, string text, bool isReply = false)
     {
