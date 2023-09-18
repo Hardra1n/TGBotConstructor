@@ -72,12 +72,45 @@ public class TelegramBot : IChatBot
 
     private async Task HandleUpdateAsync(ITelegramBotClient client, Update update, CancellationToken token)
     {
-        // Handling text message
-        if (update.Message != null && update.Message.Text != null)
+        if (update.Message != null)
         {
-            await _handler.HandleTextMessage(update.Message.ToReceiverInfo(), update.Message.Text);
-        }
+            // Handling text message
+            if (update.Message.Text != null)
+            {
+                await _handler.HandleTextMessage(update.Message.ToReceiverInfo(), update.Message.Text);
+                return;
+            }
 
-        return;
+            if (update.Message.Audio != null)
+            {
+                await _handler.HandleMediaMessage(update.Message.ToReceiverInfo(), update.Message.Audio.FileId);
+                return;
+            }
+
+            if (update.Message.Video != null)
+            {
+                await _handler.HandleMediaMessage(update.Message.ToReceiverInfo(), update.Message.Video.FileId);
+                return;
+            }
+
+            if (update.Message.Photo != null)
+            {
+                await _handler.HandleMediaMessage(update.Message.ToReceiverInfo(), update.Message.Photo.First().FileId);
+                return;
+            }
+
+            if (update.Message.Voice != null)
+            {
+                await _handler.HandleMediaMessage(update.Message.ToReceiverInfo(), update.Message.Voice.FileId);
+                return;
+            }
+
+            if (update.Message.Document != null)
+            {
+                await _handler.HandleMediaMessage(update.Message.ToReceiverInfo(), update.Message.Document.FileId);
+                return;
+            }
+
+        }
     }
 }

@@ -36,4 +36,12 @@ public class ResponseHandler
             return;
         }
     }
+
+    public async Task HandleMediaMessage(ReceiverInfo receiverInfo, string fileId)
+    {
+        if (_adminRepository.Members.Contains(receiverInfo.Id.ToString()))
+        {
+            await _chatBot.SendTextMessage(receiverInfo, $"This File Id: \"{fileId}\"", true);
+        }
+    }
 }
