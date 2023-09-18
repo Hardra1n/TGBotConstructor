@@ -34,6 +34,9 @@ public class ActionCreator
             case "Photo":
                 botAction = CreateSendPhotoAction(actionNode);
                 break;
+            case "Audio":
+                botAction = CreateAudioAction(actionNode);
+                break;
             default:
                 botAction = null;
                 break;
@@ -46,9 +49,21 @@ public class ActionCreator
         return botAction;
     }
 
+    private static SendAudioAction? CreateAudioAction(JsonNode jsonNode)
+    {
+        string? fileId = jsonNode["FileId"]?.AsValue().ToString();
+        if (fileId == null)
+        {
+            Console.WriteLine("Audio Action property in json doesn't contain 'File Id' property");
+            return null;
+        }
+        string? caption = jsonNode["Caption"]?.AsValue().ToString();
+        return new SendAudioAction(fileId, caption);
+    }
+
     private static SendPhotoAction? CreateSendPhotoAction(JsonNode jsonNode)
     {
-        string? fileId = jsonNode["File Id"]?.AsValue().ToString();
+        string? fileId = jsonNode["FileId"]?.AsValue().ToString();
         if (fileId == null)
         {
             Console.WriteLine("Photo Action property in json doesn't contain 'File Id' property");

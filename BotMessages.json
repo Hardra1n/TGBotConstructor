@@ -19,8 +19,17 @@
             "Description": "Описание3",
             "Action": {
                 "Name": "Photo",
-                "File Id": "AgACAgIAAxkBAANbZQgiQaF6ZXdF9EXOSYc-ZKuStI0AAsPMMRv1QkBIbRRgiamOnEwBAAMCAANzAAMwBA",
+                "FileId": "AgACAgIAAxkBAANbZQgiQaF6ZXdF9EXOSYc-ZKuStI0AAsPMMRv1QkBIbRRgiamOnEwBAAMCAANzAAMwBA",
                 "Caption": "Текст к фотографии"
+            }
+        },
+        {
+            "Name": "audio",
+            "Description": "Описание4",
+            "Action": {
+                "Name": "Audio",
+                "FileId": "CQACAgIAAxkBAANhZQg09doq7vM6DX9C2IJjAAHSuhrXAAK6BQACQjopSnc0dpjw2Mg-MAQ",
+                "Caption": "Текст к аудио"
             }
         }
     ],
