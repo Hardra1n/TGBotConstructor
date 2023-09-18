@@ -55,8 +55,16 @@
             "Description": "Описание7",
             "Action": {
                 "Name": "VideoNote",
-                "FileId": "DQACAgIAAxkBAANwZQg8e9kdCmJgsSD1LgRN2yWFN8kAAtk5AAJaTklIB3WUSNYGp6gwBA",
-                "Caption": "Текст к войсу"
+                "FileId": "DQACAgIAAxkBAANwZQg8e9kdCmJgsSD1LgRN2yWFN8kAAtk5AAJaTklIB3WUSNYGp6gwBA"
+            }
+        },
+        {
+            "Name": "document",
+            "Description": "Описание8",
+            "Action": {
+                "Name": "Document",
+                "FileId": "BQACAgIAAxkBAAN3ZQg-ONpozPAUNoMo1dFj-UOSa_8AAigYAALBvRhLTI1EOzrF2h8wBA",
+                "Caption": "Текст к документу"
             }
         }
     ],

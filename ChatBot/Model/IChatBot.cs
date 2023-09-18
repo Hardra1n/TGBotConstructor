@@ -19,4 +19,6 @@ public interface IChatBot
     Task SendVideoMessage(ReceiverInfo receiverInfo, string fileId, string? caption);
 
     Task SendVideoNoteMessage(ReceiverInfo receiverInfo, string fileId);
+
+    Task SendDocumentMessage(ReceiverInfo receiverInfo, string fileId, string? caption);
 }

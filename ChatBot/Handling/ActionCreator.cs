@@ -46,6 +46,9 @@ public class ActionCreator
             case "VideoNote":
                 botAction = CreateVideoNoteAction(actionNode);
                 break;
+            case "Document":
+                botAction = CreateDocumentAction(actionNode);
+                break;
             default:
                 botAction = null;
                 break;
@@ -56,6 +59,18 @@ public class ActionCreator
             return null;
         }
         return botAction;
+    }
+
+    private static SendDocumentAction? CreateDocumentAction(JsonNode jsonNode)
+    {
+        string? fileId = jsonNode["FileId"]?.AsValue().ToString();
+        if (fileId == null)
+        {
+            Console.WriteLine("Document Action property in json doesn't contain 'File Id' property");
+            return null;
+        }
+        string? caption = jsonNode["Caption"]?.AsValue().ToString();
+        return new SendDocumentAction(fileId, caption);
     }
 
     private static SendVideoAction? CreateVideoAction(JsonNode jsonNode)
