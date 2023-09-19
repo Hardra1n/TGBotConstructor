@@ -23,6 +23,11 @@ public class TelegramBot : IChatBot
         _handler = new ResponseHandler(this);
     }
 
+    public async Task SendAlbumMessage(ReceiverInfo receiverInfo, IEnumerable<KeyValuePair<string, string>> typeFileIdPairs)
+    {
+        await _client.SendMediaGroupAsync(receiverInfo.Id, typeFileIdPairs.ConvertToAlbumInputMedia());
+    }
+
     public async Task SendAudioMessage(ReceiverInfo receiverInfo, string fileId, string? caption)
     {
         await _client.SendAudioAsync(receiverInfo.Id, InputFile.FromFileId(fileId), caption: caption);

@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.Json.Nodes;
 using ChatBot.Handling.Actions;
 
@@ -49,6 +50,9 @@ public class ActionCreator
             case "Document":
                 botAction = CreateDocumentAction(actionNode);
                 break;
+            case "Album":
+                botAction = CreateAlbumAction(actionNode);
+                break;
             default:
                 botAction = null;
                 break;
@@ -59,6 +63,64 @@ public class ActionCreator
             return null;
         }
         return botAction;
+    }
+
+    private static SendAlbumAction? CreateAlbumAction(JsonNode jsonNode)
+    {
+        List<string> possibleAlbumItemTypes = new() { "Photo", "Video", "Audio", "Document" };
+        List<KeyValuePair<string, string>> albumItems = new();
+        JsonNode? filesNode = jsonNode["Files"];
+        if (filesNode == null)
+        {
+            Console.WriteLine("Album Action property in json doesn'y containt 'Files' property");
+            return null;
+        }
+        if (filesNode.AsArray().Count == 0)
+        {
+            Console.WriteLine("Album action files property must contain members with 'Type' and 'FileId' properties");
+            return null;
+        }
+        foreach (var itemNode in filesNode.AsArray())
+        {
+            if (itemNode == null)
+                return null;
+
+            string? itemType = itemNode["Type"]?.AsValue().ToString();
+            string? itemFileId = itemNode["FileId"]?.AsValue().ToString();
+            if (itemType == null || itemFileId == null)
+            {
+                System.Console.WriteLine("Album action files property must contain members with 'Type' and 'FileId' properties");
+                return null;
+            }
+            if (!possibleAlbumItemTypes.Contains(itemType))
+            {
+                StringBuilder possibleTypes = new StringBuilder();
+                foreach (var type in possibleAlbumItemTypes)
+                {
+                    possibleTypes.Append('\'' + type + "' ");
+                }
+                System.Console.WriteLine($"Album item type must be one of the followings: {possibleTypes}");
+                return null;
+            }
+            // If possible types are already changed
+            if (possibleAlbumItemTypes.Count > 2)
+                switch (itemType)
+                {
+                    case "Photo":
+                    case "Video":
+                        possibleAlbumItemTypes.RemoveAll(item => item == "Audio" || item == "Document");
+                        break;
+                    case "Document":
+                        possibleAlbumItemTypes = new List<string>() { "Document" };
+                        break;
+                    case "Audio":
+                        possibleAlbumItemTypes = new List<string>() { "Audio" };
+                        break;
+                }
+            albumItems.Add(KeyValuePair.Create(itemType, itemFileId));
+        }
+
+        return new SendAlbumAction(albumItems);
     }
 
     private static SendDocumentAction? CreateDocumentAction(JsonNode jsonNode)

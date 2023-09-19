@@ -21,4 +21,6 @@ public interface IChatBot
     Task SendVideoNoteMessage(ReceiverInfo receiverInfo, string fileId);
 
     Task SendDocumentMessage(ReceiverInfo receiverInfo, string fileId, string? caption);
+
+    Task SendAlbumMessage(ReceiverInfo receiverInfo, IEnumerable<KeyValuePair<string, string>> typeFileIdPairs);
 }

@@ -66,6 +66,65 @@
                 "FileId": "BQACAgIAAxkBAAN3ZQg-ONpozPAUNoMo1dFj-UOSa_8AAigYAALBvRhLTI1EOzrF2h8wBA",
                 "Caption": "Текст к документу"
             }
+        },
+        {
+            "Name": "mediaalbum",
+            "Description": "Описание9",
+            "Action": {
+                "Name": "Album",
+                "Files": [
+                    {
+                        "Type": "Photo",
+                        "FileId": "AgACAgIAAxkBAANbZQgiQaF6ZXdF9EXOSYc-ZKuStI0AAsPMMRv1QkBIbRRgiamOnEwBAAMCAANzAAMwBA"
+                    },
+                    {
+                        "Type": "Video",
+                        "FileId": "BAACAgIAAxkBAANrZQg6AAHnYXjEl7PM9_C4kr9MUMhtAAKhLwACPW3hSE1HX-x2rclrMAQ"
+                    }
+                ]
+            }
+        },
+        {
+            "Name": "documentalbum",
+            "Description": "Описание10",
+            "Action": {
+                "Name": "Album",
+                "Files": [
+                    {
+                        "Type": "Document",
+                        "FileId": "BQACAgIAAxkBAAN3ZQg-ONpozPAUNoMo1dFj-UOSa_8AAigYAALBvRhLTI1EOzrF2h8wBA"
+                    },
+                    {
+                        "Type": "Document",
+                        "FileId": "BQACAgIAAxkBAAN3ZQg-ONpozPAUNoMo1dFj-UOSa_8AAigYAALBvRhLTI1EOzrF2h8wBA"
+                    },
+                    {
+                        "Type": "Document",
+                        "FileId": "BQACAgIAAxkBAAN3ZQg-ONpozPAUNoMo1dFj-UOSa_8AAigYAALBvRhLTI1EOzrF2h8wBA"
+                    }
+                ]
+            }
+        },
+        {
+            "Name": "audioalbum",
+            "Description": "Описание11",
+            "Action": {
+                "Name": "Album",
+                "Files": [
+                    {
+                        "Type": "Audio",
+                        "FileId": "CQACAgIAAxkBAANhZQg09doq7vM6DX9C2IJjAAHSuhrXAAK6BQACQjopSnc0dpjw2Mg-MAQ"
+                    },
+                    {
+                        "Type": "Audio",
+                        "FileId": "CQACAgIAAxkBAANhZQg09doq7vM6DX9C2IJjAAHSuhrXAAK6BQACQjopSnc0dpjw2Mg-MAQ"
+                    },
+                    {
+                        "Type": "Audio",
+                        "FileId": "CQACAgIAAxkBAANhZQg09doq7vM6DX9C2IJjAAHSuhrXAAK6BQACQjopSnc0dpjw2Mg-MAQ"
+                    }
+                ]
+            }
         }
     ],
     "Scenarious": {}
