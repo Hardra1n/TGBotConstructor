@@ -4,11 +4,9 @@ using ChatBot.Model;
 public class SendTextBotAction : BotAction
 {
     private readonly string _text;
-    private readonly bool _isReply;
 
-    public SendTextBotAction(string text, bool isReply = false)
+    public SendTextBotAction(string text, bool isReply) : base(isReply)
     {
-        _isReply = isReply;
         _text = text;
     }
 

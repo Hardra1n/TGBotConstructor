@@ -6,7 +6,7 @@ public class SendVideoAction : BotAction
     private readonly string _fileId;
     private readonly string? _caption;
 
-    public SendVideoAction(string fileId, string? caption)
+    public SendVideoAction(string fileId, string? caption, bool isReply) : base(isReply)
     {
         _fileId = fileId;
         _caption = caption == string.Empty ? null : caption;
@@ -14,6 +14,6 @@ public class SendVideoAction : BotAction
 
     public override async Task Execute(IChatBot chatBot, ReceiverInfo receiverInfo)
     {
-        await chatBot.SendVideoMessage(receiverInfo, _fileId, _caption);
+        await chatBot.SendVideoMessage(receiverInfo, _fileId, _caption, _isReply);
     }
 }

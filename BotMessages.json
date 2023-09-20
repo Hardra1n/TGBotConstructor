@@ -20,7 +20,8 @@
             "Action": {
                 "Name": "Photo",
                 "FileId": "AgACAgIAAxkBAANbZQgiQaF6ZXdF9EXOSYc-ZKuStI0AAsPMMRv1QkBIbRRgiamOnEwBAAMCAANzAAMwBA",
-                "Caption": "Текст к фотографии"
+                "Caption": "Текст к фотографии",
+                "Reply": true
             }
         },
         {
@@ -29,7 +30,8 @@
             "Action": {
                 "Name": "Audio",
                 "FileId": "CQACAgIAAxkBAANhZQg09doq7vM6DX9C2IJjAAHSuhrXAAK6BQACQjopSnc0dpjw2Mg-MAQ",
-                "Caption": "Текст к аудио"
+                "Caption": "Текст к аудио",
+                "Reply": true
             }
         },
         {
@@ -38,7 +40,8 @@
             "Action": {
                 "Name": "Voice",
                 "FileId": "AwACAgIAAxkBAANdZQgi5EbbZbQaXNyp4DC70o6HGa0AAhA6AAJaTkFIiaK9ekk-jIkwBA",
-                "Caption": "Текст к войсу"
+                "Caption": "Текст к войсу",
+                "Reply": true
             }
         },
         {
@@ -47,7 +50,8 @@
             "Action": {
                 "Name": "Video",
                 "FileId": "BAACAgIAAxkBAANrZQg6AAHnYXjEl7PM9_C4kr9MUMhtAAKhLwACPW3hSE1HX-x2rclrMAQ",
-                "Caption": "Текст к видео"
+                "Caption": "Текст к видео",
+                "Reply": true
             }
         },
         {
@@ -55,7 +59,8 @@
             "Description": "Описание7",
             "Action": {
                 "Name": "VideoNote",
-                "FileId": "DQACAgIAAxkBAANwZQg8e9kdCmJgsSD1LgRN2yWFN8kAAtk5AAJaTklIB3WUSNYGp6gwBA"
+                "FileId": "DQACAgIAAxkBAANwZQg8e9kdCmJgsSD1LgRN2yWFN8kAAtk5AAJaTklIB3WUSNYGp6gwBA",
+                "Reply": true
             }
         },
         {
@@ -81,7 +86,8 @@
                         "Type": "Video",
                         "FileId": "BAACAgIAAxkBAANrZQg6AAHnYXjEl7PM9_C4kr9MUMhtAAKhLwACPW3hSE1HX-x2rclrMAQ"
                     }
-                ]
+                ],
+                "Reply": false
             }
         },
         {
@@ -102,7 +108,8 @@
                         "Type": "Document",
                         "FileId": "BQACAgIAAxkBAAN3ZQg-ONpozPAUNoMo1dFj-UOSa_8AAigYAALBvRhLTI1EOzrF2h8wBA"
                     }
-                ]
+                ],
+                "Reply": true
             }
         },
         {

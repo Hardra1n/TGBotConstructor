@@ -120,7 +120,7 @@ public class ActionCreator
             albumItems.Add(KeyValuePair.Create(itemType, itemFileId));
         }
 
-        return new SendAlbumAction(albumItems);
+        return new SendAlbumAction(albumItems, IsRepliableAction(jsonNode));
     }
 
     private static SendDocumentAction? CreateDocumentAction(JsonNode jsonNode)
@@ -132,7 +132,7 @@ public class ActionCreator
             return null;
         }
         string? caption = jsonNode["Caption"]?.AsValue().ToString();
-        return new SendDocumentAction(fileId, caption);
+        return new SendDocumentAction(fileId, caption, IsRepliableAction(jsonNode));
     }
 
     private static SendVideoAction? CreateVideoAction(JsonNode jsonNode)
@@ -144,7 +144,7 @@ public class ActionCreator
             return null;
         }
         string? caption = jsonNode["Caption"]?.AsValue().ToString();
-        return new SendVideoAction(fileId, caption);
+        return new SendVideoAction(fileId, caption, IsRepliableAction(jsonNode));
     }
     private static SendVideoNoteAction? CreateVideoNoteAction(JsonNode jsonNode)
     {
@@ -154,7 +154,7 @@ public class ActionCreator
             Console.WriteLine("VideoNote Action property in json doesn't contain 'File Id' property");
             return null;
         }
-        return new SendVideoNoteAction(fileId);
+        return new SendVideoNoteAction(fileId, IsRepliableAction(jsonNode));
     }
     private static SendVoiceAction? CreateVoiceAction(JsonNode jsonNode)
     {
@@ -165,7 +165,7 @@ public class ActionCreator
             return null;
         }
         string? caption = jsonNode["Caption"]?.AsValue().ToString();
-        return new SendVoiceAction(fileId, caption);
+        return new SendVoiceAction(fileId, caption, IsRepliableAction(jsonNode));
     }
 
     private static SendAudioAction? CreateAudioAction(JsonNode jsonNode)
@@ -177,7 +177,7 @@ public class ActionCreator
             return null;
         }
         string? caption = jsonNode["Caption"]?.AsValue().ToString();
-        return new SendAudioAction(fileId, caption);
+        return new SendAudioAction(fileId, caption, IsRepliableAction(jsonNode));
     }
 
     private static SendPhotoAction? CreateSendPhotoAction(JsonNode jsonNode)
@@ -189,7 +189,7 @@ public class ActionCreator
             return null;
         }
         string? caption = jsonNode["Caption"]?.AsValue().ToString();
-        return new SendPhotoAction(fileId, caption);
+        return new SendPhotoAction(fileId, caption, IsRepliableAction(jsonNode));
     }
 
     private static SendTextBotAction? CreateSendTextBotAction(JsonNode jsonNode)
@@ -200,8 +200,9 @@ public class ActionCreator
             Console.WriteLine("Text Action property in json doesn't contain 'Value' property");
             return null;
         }
-
-        bool isReply = jsonNode["Reply"] == null ? false : (bool)jsonNode["Reply"]!.AsValue();
-        return new SendTextBotAction(textToWrite, isReply);
+        return new SendTextBotAction(textToWrite, IsRepliableAction(jsonNode));
     }
+
+    private static bool IsRepliableAction(JsonNode jsonNode)
+        => jsonNode["Reply"] == null ? false : (bool)jsonNode["Reply"]!.AsValue();
 }

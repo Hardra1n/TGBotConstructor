@@ -1,3 +1,4 @@
+using System.Security.Authentication.ExtendedProtection;
 using ChatBot.Handling;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
@@ -23,49 +24,52 @@ public class TelegramBot : IChatBot
         _handler = new ResponseHandler(this);
     }
 
-    public async Task SendAlbumMessage(ReceiverInfo receiverInfo, IEnumerable<KeyValuePair<string, string>> typeFileIdPairs)
+    public async Task SendAlbumMessage(ReceiverInfo receiverInfo, IEnumerable<KeyValuePair<string, string>> typeFileIdPairs, bool isReply)
     {
-        await _client.SendMediaGroupAsync(receiverInfo.Id, typeFileIdPairs.ConvertToAlbumInputMedia());
+        int? messageToReply = isReply ? int.Parse(receiverInfo.MessageId) : null;
+        await _client.SendMediaGroupAsync(receiverInfo.Id, typeFileIdPairs.ConvertToAlbumInputMedia(), replyToMessageId: messageToReply);
     }
 
-    public async Task SendAudioMessage(ReceiverInfo receiverInfo, string fileId, string? caption)
+    public async Task SendAudioMessage(ReceiverInfo receiverInfo, string fileId, string? caption, bool isReply)
     {
-        await _client.SendAudioAsync(receiverInfo.Id, InputFile.FromFileId(fileId), caption: caption);
+        int? messageToReply = isReply ? int.Parse(receiverInfo.MessageId) : null;
+        await _client.SendAudioAsync(receiverInfo.Id, InputFile.FromFileId(fileId), caption: caption, replyToMessageId: messageToReply);
     }
 
-    public async Task SendDocumentMessage(ReceiverInfo receiverInfo, string fileId, string? caption)
+    public async Task SendDocumentMessage(ReceiverInfo receiverInfo, string fileId, string? caption, bool isReply)
     {
-        await _client.SendDocumentAsync(receiverInfo.Id, InputFile.FromFileId(fileId), caption: caption);
+        int? messageToReply = isReply ? int.Parse(receiverInfo.MessageId) : null;
+        await _client.SendDocumentAsync(receiverInfo.Id, InputFile.FromFileId(fileId), caption: caption, replyToMessageId: messageToReply);
     }
 
-    public async Task SendPhotoMessage(ReceiverInfo receiverInfo, string fileId, string? caption)
+    public async Task SendPhotoMessage(ReceiverInfo receiverInfo, string fileId, string? caption, bool isReply)
     {
-        await _client.SendPhotoAsync(receiverInfo.Id, InputFile.FromFileId(fileId), caption: caption);
+        int? messageToReply = isReply ? int.Parse(receiverInfo.MessageId) : null;
+        await _client.SendPhotoAsync(receiverInfo.Id, InputFile.FromFileId(fileId), caption: caption, replyToMessageId: messageToReply);
     }
 
-    public async Task SendTextMessage(ReceiverInfo reciever, string text, bool isReply = false)
+    public async Task SendTextMessage(ReceiverInfo receiverInfo, string text, bool isReply)
     {
-        int? messageToReply = null;
-        if (isReply)
-        {
-            messageToReply = int.Parse(reciever.MessageId);
-        }
-        await _client.SendTextMessageAsync(reciever.Id, text, replyToMessageId: messageToReply);
+        int? messageToReply = isReply ? int.Parse(receiverInfo.MessageId) : null;
+        await _client.SendTextMessageAsync(receiverInfo.Id, text, replyToMessageId: messageToReply);
     }
 
-    public async Task SendVideoMessage(ReceiverInfo receiverInfo, string fileId, string? caption)
+    public async Task SendVideoMessage(ReceiverInfo receiverInfo, string fileId, string? caption, bool isReply)
     {
-        await _client.SendVideoAsync(receiverInfo.Id, InputFile.FromFileId(fileId), caption: caption);
+        int? messageToReply = isReply ? int.Parse(receiverInfo.MessageId) : null;
+        await _client.SendVideoAsync(receiverInfo.Id, InputFile.FromFileId(fileId), caption: caption, replyToMessageId: messageToReply);
     }
 
-    public async Task SendVideoNoteMessage(ReceiverInfo receiverInfo, string fileId)
+    public async Task SendVideoNoteMessage(ReceiverInfo receiverInfo, string fileId, bool isReply)
     {
-        await _client.SendVideoNoteAsync(receiverInfo.Id, InputFile.FromFileId(fileId));
+        int? messageToReply = isReply ? int.Parse(receiverInfo.MessageId) : null;
+        await _client.SendVideoNoteAsync(receiverInfo.Id, InputFile.FromFileId(fileId), replyToMessageId: messageToReply);
     }
 
-    public async Task SendVoiceMessage(ReceiverInfo receiverInfo, string fileId, string? caption)
+    public async Task SendVoiceMessage(ReceiverInfo receiverInfo, string fileId, string? caption, bool isReply)
     {
-        await _client.SendVoiceAsync(receiverInfo.Id, InputFile.FromFileId(fileId), caption: caption);
+        int? messageToReply = isReply ? int.Parse(receiverInfo.MessageId) : null;
+        await _client.SendVoiceAsync(receiverInfo.Id, InputFile.FromFileId(fileId), caption: caption, replyToMessageId: messageToReply);
     }
 
     public async Task SetCommands(IBotCommand[] commands)

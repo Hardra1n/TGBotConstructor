@@ -6,13 +6,13 @@ public class SendVideoNoteAction : BotAction
 {
     private readonly string _fileId;
 
-    public SendVideoNoteAction(string fileId)
+    public SendVideoNoteAction(string fileId, bool isReply) : base(isReply)
     {
         _fileId = fileId;
     }
 
     public override async Task Execute(IChatBot chatBot, ReceiverInfo receiverInfo)
     {
-        await chatBot.SendVideoNoteMessage(receiverInfo, _fileId);
+        await chatBot.SendVideoNoteMessage(receiverInfo, _fileId, _isReply);
     }
 }

@@ -7,7 +7,7 @@ public class SendDocumentAction : BotAction
     private readonly string _fileId;
     private readonly string? _caption;
 
-    public SendDocumentAction(string fileId, string? caption)
+    public SendDocumentAction(string fileId, string? caption, bool isReply) : base(isReply)
     {
         _fileId = fileId;
         _caption = caption == string.Empty ? null : caption;
@@ -15,6 +15,6 @@ public class SendDocumentAction : BotAction
 
     public override async Task Execute(IChatBot chatBot, ReceiverInfo receiverInfo)
     {
-        await chatBot.SendDocumentMessage(receiverInfo, _fileId, _caption);
+        await chatBot.SendDocumentMessage(receiverInfo, _fileId, _caption, _isReply);
     }
 }
