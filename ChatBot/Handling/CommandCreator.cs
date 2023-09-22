@@ -1,24 +1,50 @@
 using System.Text;
 using System.Text.Json.Nodes;
 using ChatBot.Handling.Actions;
+using ChatBot.Model;
 
-public class ActionCreator
+public class CommandCreator
 {
-    public static IDictionary<string, BotAction> GetTextBotActionsDictionary()
+    public static IEnumerable<BotCommand> GetBotCommands()
     {
-        var textJsonNodePairs = Extensions.GetCommandActionJsonNodePairs();
-        var textBotActionDictionary = new Dictionary<string, BotAction>();
-        foreach (var pair in textJsonNodePairs)
-        {
-            BotAction? botAction = CreateBotAction(pair.Value);
-            if (botAction != null)
-                textBotActionDictionary.Add(pair.Key, botAction);
+        var commandsNode = Extensions.GetCommandsJsonNode();
+        if (commandsNode.AsArray().Count == 0)
+            return Array.Empty<BotCommand>();
 
+        List<BotCommand> commands = new List<BotCommand>();
+
+        foreach (var commandNode in commandsNode.AsArray())
+        {
+            if (commandNode == null)
+            {
+                System.Console.WriteLine("Unable to convert command node from json");
+                continue;
+            }
+
+            var commandName = commandNode["Name"]?.AsValue().ToString();
+            var commandDescription = commandNode["Description"]?.AsValue().ToString();
+            var actionNode = commandNode["Action"];
+            if (commandName == null || commandName == string.Empty
+                || commandDescription == null || commandDescription == string.Empty
+                || actionNode == null)
+            {
+                System.Console.WriteLine("Command must contain not empty 'Name', 'Description', 'Action' properties");
+                continue;
+            }
+
+            var botAction = CreateBotAction(actionNode);
+            if (botAction == null)
+            {
+                System.Console.WriteLine("Unable to create bot action");
+                continue;
+            }
+
+            commands.Add(new BotCommand(commandName, commandDescription, botAction));
         }
-        return textBotActionDictionary;
+        return commands;
     }
 
-    private static BotAction? CreateBotAction(JsonNode actionNode)
+    public static BotAction? CreateBotAction(JsonNode actionNode)
     {
         string actionName = actionNode["Name"]?.AsValue().ToString()!;
         if (actionName == null)
@@ -72,7 +98,7 @@ public class ActionCreator
         JsonNode? filesNode = jsonNode["Files"];
         if (filesNode == null)
         {
-            Console.WriteLine("Album Action property in json doesn'y containt 'Files' property");
+            Console.WriteLine("Album Action property must contain 'Files' property");
             return null;
         }
         if (filesNode.AsArray().Count == 0)
@@ -146,6 +172,7 @@ public class ActionCreator
         string? caption = jsonNode["Caption"]?.AsValue().ToString();
         return new SendVideoAction(fileId, caption, IsRepliableAction(jsonNode));
     }
+
     private static SendVideoNoteAction? CreateVideoNoteAction(JsonNode jsonNode)
     {
         string? fileId = jsonNode["FileId"]?.AsValue().ToString();
@@ -156,6 +183,7 @@ public class ActionCreator
         }
         return new SendVideoNoteAction(fileId, IsRepliableAction(jsonNode));
     }
+
     private static SendVoiceAction? CreateVoiceAction(JsonNode jsonNode)
     {
         string? fileId = jsonNode["FileId"]?.AsValue().ToString();

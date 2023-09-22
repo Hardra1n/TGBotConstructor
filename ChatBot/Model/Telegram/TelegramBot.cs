@@ -72,12 +72,11 @@ public class TelegramBot : IChatBot
         await _client.SendVoiceAsync(receiverInfo.Id, InputFile.FromFileId(fileId), caption: caption, replyToMessageId: messageToReply);
     }
 
-    public async Task SetCommands(IBotCommand[] commands)
+    public async Task SetCommands(IEnumerable<BotCommand> commands)
     {
         try
         {
-            var nativeCommands = commands.Select(cmd => (TelegramBotCommand)cmd);
-            await _client.SetMyCommandsAsync(nativeCommands.Select(cmd => cmd.ToNativeBotCommand()));
+            await _client.SetMyCommandsAsync(commands.Select(cmd => cmd.ToNativeBotCommand()));
         }
         catch (Exception ex)
         {

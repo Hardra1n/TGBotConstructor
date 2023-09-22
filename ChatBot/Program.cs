@@ -10,7 +10,7 @@ internal class Program
     {
         var botConfig = Extensions.GetTelegramBotConfigurationFromJson();
 
-        var botCommands = Extensions.GetTelegramBotCommandsFromJson();
+        var botCommands = CommandCreator.GetBotCommands();
 
 
         IChatBot chatBot = new TelegramBot(botConfig);

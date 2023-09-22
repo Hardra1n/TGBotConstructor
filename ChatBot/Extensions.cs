@@ -9,12 +9,13 @@ public static class Extensions
     {
         try
         {
-            string jsonConfig = System.IO.File.ReadAllText("./BotConfiguration.json");
-            var botConfig = JsonSerializer.Deserialize<TelegramBotConfiguration>(jsonConfig);
-            if (botConfig != null)
-                return botConfig;
-            else
+            var jsonNode = GetJsonFileAsNode("./BotConfiguration.json");
+            var botConfig = jsonNode.Deserialize<TelegramBotConfiguration>();
+            if (botConfig == null)
                 throw new Exception("botConfig == null");
+
+            return botConfig;
+
         }
         catch (Exception ex)
         {
@@ -23,29 +24,11 @@ public static class Extensions
         }
     }
 
-    public static IBotCommand[] GetTelegramBotCommandsFromJson()
-    {
-        try
-        {
-            string jsonCommands = System.IO.File.ReadAllText("./BotMessages.json");
-            JsonNode jsonNode = JsonNode.Parse(jsonCommands)!;
-            IBotCommand[] botCommands = jsonNode["Commands"].Deserialize<TelegramBotCommand[]>()
-                ?? Array.Empty<IBotCommand>();
-            return botCommands;
-        }
-        catch (Exception ex)
-        {
-            System.Console.WriteLine($"Unable to convert json to telegram command objects. \n {ex.Message}");
-            throw;
-        }
-    }
-
     public static IEnumerable<KeyValuePair<string, JsonNode>> GetCommandActionJsonNodePairs()
     {
         try
         {
-            string jsonCommands = System.IO.File.ReadAllText("./BotMessages.json");
-            JsonNode jsonNode = JsonNode.Parse(jsonCommands)!;
+            var jsonNode = GetJsonFileAsNode("./BotMessages.json");
             var commandsNode = jsonNode["Commands"]!.AsArray();
             List<KeyValuePair<string, JsonNode>> keyValuesList = new();
             foreach (var node in commandsNode)
@@ -70,8 +53,7 @@ public static class Extensions
     {
         try
         {
-            string jsonText = System.IO.File.ReadAllText("./Admins.json");
-            JsonNode jsonNode = JsonNode.Parse(jsonText)!;
+            var jsonNode = GetJsonFileAsNode("./Admins.json");
             var adminRepository = jsonNode.Deserialize<TelegramAdminRepository>();
             if (adminRepository == null)
                 throw new NullReferenceException();
@@ -98,5 +80,41 @@ public static class Extensions
             System.Console.WriteLine($"Unable to add admin member to json. \n {ex.Message}");
             throw;
         }
+    }
+
+    public static JsonArray GetScenariousJsonNodes()
+    {
+        try
+        {
+            var node = GetJsonFileAsNode("./BotMessages.json");
+            JsonArray? scenariousNodes = node["Scenarious"]?.AsArray();
+            if (scenariousNodes == null)
+                throw new Exception("Unable to find 'Scenarious' property in json");
+            return scenariousNodes;
+        }
+        catch (Exception ex)
+        {
+            System.Console.WriteLine($"Unable to get scenarious from json. \n {ex.Message}");
+            throw;
+        }
+    }
+
+    public static JsonNode GetJsonFileAsNode(string jsonFile)
+    {
+
+        string jsonfile = System.IO.File.ReadAllText(jsonFile);
+        JsonNode? node = JsonNode.Parse(jsonfile);
+        if (node == null)
+            throw new Exception($"Unable to parse file to json");
+        return node;
+    }
+
+    public static JsonNode GetCommandsJsonNode()
+    {
+        var jsonNode = GetJsonFileAsNode("BotMessages.json");
+        var commandsNode = jsonNode["Commands"];
+        if (commandsNode == null)
+            throw new Exception("Unable to get node 'Commands'");
+        return commandsNode;
     }
 }

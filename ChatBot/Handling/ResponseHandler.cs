@@ -8,23 +8,23 @@ public class ResponseHandler
 {
     private IChatBot _chatBot;
 
-    private IDictionary<string, BotAction> _textHandlers;
+    private IEnumerable<BotCommand> _commands;
 
     private TelegramAdminRepository _adminRepository;
 
     public ResponseHandler(IChatBot chatBot)
     {
         _chatBot = chatBot;
-        _textHandlers = ActionCreator.GetTextBotActionsDictionary();
+        _commands = CommandCreator.GetBotCommands();
         _adminRepository = Extensions.GetTelegramAdminRepository();
     }
 
     public async Task HandleTextMessage(ReceiverInfo receiverInfo, string text)
     {
-        BotAction? action;
-        if (_textHandlers.TryGetValue(text, out action))
+        var commandToExecute = _commands.FirstOrDefault(cmd => '/' + cmd.Name == text);
+        if (commandToExecute != null)
         {
-            await action.Execute(_chatBot, receiverInfo);
+            await commandToExecute.Call(_chatBot, receiverInfo);
             return;
         }
 

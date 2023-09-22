@@ -1,5 +1,6 @@
 using ChatBot.Model;
 using Telegram.Bot.Types;
+using NativeType = Telegram.Bot.Types;
 
 namespace ChatBot.Model.Telegram;
 
@@ -8,8 +9,8 @@ public static class TelegramExtensions
     public static ReceiverInfo ToReceiverInfo(this Message message)
         => new ReceiverInfo(message.From!.FirstName, message.MessageId.ToString()) { Id = message.Chat.Id };
 
-    public static BotCommand ToNativeBotCommand(this TelegramBotCommand command)
-        => new BotCommand() { Command = command.Name, Description = command.Description };
+    public static NativeType.BotCommand ToNativeBotCommand(this BotCommand command)
+        => new NativeType.BotCommand() { Command = command.Name, Description = command.Description };
 
     public static IEnumerable<IAlbumInputMedia> ConvertToAlbumInputMedia(
         this IEnumerable<KeyValuePair<string, string>> pairs)

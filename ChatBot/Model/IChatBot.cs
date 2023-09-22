@@ -6,7 +6,7 @@ public interface IChatBot
 {
     void Start(CancellationTokenSource cts);
 
-    Task SetCommands(IBotCommand[] commands);
+    Task SetCommands(IEnumerable<BotCommand> commands);
 
     Task SendTextMessage(ReceiverInfo receiverInfo, string text, bool isReply);
 
