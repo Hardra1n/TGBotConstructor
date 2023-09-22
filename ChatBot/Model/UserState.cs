@@ -4,10 +4,15 @@ namespace ChatBot.Model;
 
 public class UserState
 {
-    public long Id;
+    public int? ScenarioId = null;
 
-    public UserState(int id)
+    public int? StepId = null;
+
+    public UserState() { }
+
+    public void ChangeState(int scenarioId, int stepId)
     {
-        Id = id;
+        ScenarioId = scenarioId;
+        StepId = stepId;
     }
 }

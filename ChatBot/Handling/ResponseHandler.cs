@@ -12,6 +12,8 @@ public class ResponseHandler
 
     private ScenarioRepository _scenarioRepository;
 
+    private UserStateRepository _userStateRepository;
+
     private TelegramAdminRepository _adminRepository;
 
     public ResponseHandler(IChatBot chatBot)
@@ -20,10 +22,12 @@ public class ResponseHandler
         _commands = CommandCreator.GetBotCommands();
         _adminRepository = Extensions.GetTelegramAdminRepository();
         _scenarioRepository = new();
+        _userStateRepository = new();
     }
 
     public async Task HandleTextMessage(ReceiverInfo receiverInfo, string text)
     {
+        UserState userState = _userStateRepository.GetOrCreate(receiverInfo.Id);
         var commandToExecute = _commands.FirstOrDefault(cmd => '/' + cmd.Name == text);
         if (commandToExecute != null)
         {
@@ -31,12 +35,15 @@ public class ResponseHandler
             return;
         }
 
+        // Try to navigate to scenarious by response to command (command's reference)
         var reference = _commands.FirstOrDefault(cmd => cmd.GetReferenceByKey(text) != null)?.GetReferenceByKey(text);
         if (reference != null)
         {
-            await _scenarioRepository.CallResponseByReference(_chatBot, receiverInfo, reference);
+            await _scenarioRepository.CallResponseByReference(_chatBot, receiverInfo, reference, userState);
             return;
         }
+
+        await _scenarioRepository.FindAndCallResponseByText(_chatBot, receiverInfo, text, userState);
 
         // Creation admin
         if (text == _adminRepository.SecretPhrase)

@@ -5,10 +5,13 @@ using ChatBot.Handling.References;
 public class ReferenceCreator
 {
 
-    public static IEnumerable<Reference> CreateReferences(JsonNode nodeWithReference)
+    public static IEnumerable<Reference> CreateReferences(JsonNode nodeWithReference,
+        HashSet<Scenario>? scenarioHashSet = null)
     {
         List<Reference> references = new List<Reference>();
-        ScenarioRepository scenarioRepository = new();
+        if (scenarioHashSet == null)
+            scenarioHashSet = ScenarioCreator.GetScenariousHashSet();
+
         var referenceArray = nodeWithReference["Reference"]?.AsArray();
         if (referenceArray != null && referenceArray.Count != 0)
             foreach (var referenceNode in referenceArray)
@@ -25,8 +28,12 @@ public class ReferenceCreator
                 if (scenarioIdStr != null && int.TryParse(scenarioIdStr, out int scenarioId)
                     && stepIdStr != null && int.TryParse(stepIdStr, out int stepId))
                 {
-                    if (scenarioRepository.Contains(scenarioId, stepId))
+                    if (scenarioHashSet.FirstOrDefault(scr => scr.Id == scenarioId) != null &&
+                        scenarioHashSet.First(scr => scr.Id == scenarioId)
+                            .Steps.FirstOrDefault(step => step.Id == stepId) != null)
+                    {
                         references.Add(new Reference(scenarioId, stepId, call));
+                    }
                 }
             }
         return references;

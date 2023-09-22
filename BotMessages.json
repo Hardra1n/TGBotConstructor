@@ -138,7 +138,7 @@
             "Description": "Описание команды",
             "Action": {
                 "Name": "Text",
-                "Value": "Описание которое я буду вам посылать",
+                "Value": "Для того чтобы перейти на первый шаг первого сценарция введите: 'Приступить к первому сценарию', для второго шага введите 'Пропустить первый шаг'",
                 "Reply": true
             },
             "Reference": [
@@ -165,25 +165,49 @@
                     "Id": 1,
                     "Action": {
                         "Name": "Text",
-                        "Value": "Это первый шаг сценария",
+                        "Value": "Это первый шаг сценария. Чтобы перейти на второй шаг введите 'Переведи меня на второй шаг'",
                         "Reply": true
-                    }
+                    },
+                    "Reference": [
+                        {
+                            "Scenario": 1,
+                            "Step": 2,
+                            "CallMethod": "Text",
+                            "CallValue": "Переведи меня на второй шаг"
+                        }
+                    ]
                 },
                 {
                     "Id": 2,
                     "Action": {
                         "Name": "Text",
-                        "Value": "Второй шаг сценария"
-                    }
+                        "Value": "Второй шаг сценария. Чтобы перейти на 3-й шаг введите: 'Дальше'"
+                    },
+                    "Reference": [
+                        {
+                            "Scenario": 1,
+                            "Step": 3,
+                            "CallMethod": "Text",
+                            "CallValue": "Дальше"
+                        }
+                    ]
                 },
                 {
                     "Id": 3,
                     "Action": {
                         "Name": "Audio",
                         "FileId": "CQACAgIAAxkBAANhZQg09doq7vM6DX9C2IJjAAHSuhrXAAK6BQACQjopSnc0dpjw2Mg-MAQ",
-                        "Caption": "Рассказ третьего шага сценария",
+                        "Caption": "Рассказ третьего шага сценария, если хотите вернуться, введите: 'вернуться на второй'",
                         "Reply": true
-                    }
+                    },
+                    "Reference": [
+                        {
+                            "Scenario": 1,
+                            "Step": 2,
+                            "CallMethod": "Text",
+                            "CallValue": "Вернуться на второй"
+                        }
+                    ]
                 }
             ]
         }

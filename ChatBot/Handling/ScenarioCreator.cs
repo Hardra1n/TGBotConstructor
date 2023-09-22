@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Text.Json.Nodes;
 using ChatBot.Handling.Actions;
 
@@ -7,17 +8,54 @@ public static class ScenarioCreator
 {
     public static HashSet<Scenario> GetScenariousHashSet()
     {
-        HashSet<Scenario> scenarios = new();
+        HashSet<Scenario> scenarious = new();
         JsonArray scenariousNode = Extensions.GetScenariousJsonNodes();
         foreach (var scenarioNode in scenariousNode)
         {
             Scenario? scenario = CreateScenario(scenarioNode);
             if (scenario == null)
                 continue;
-            if (!scenarios.Add(scenario))
+            if (!scenarious.Add(scenario))
                 System.Console.WriteLine($"Scenario with id {scenario.Id} already exist. Scenario must contain unique Id");
         }
-        return scenarios;
+        return scenarious;
+    }
+
+    public static HashSet<Scenario>? InitStepReferences(HashSet<Scenario> scenarious)
+    {
+        JsonArray scenariousNode = Extensions.GetScenariousJsonNodes();
+        foreach (var scenarioNode in scenariousNode)
+        {
+            if (scenarioNode == null)
+                continue;
+            int? scenarioId = (int?)scenarioNode["Id"]?.AsValue();
+            if (scenarioId == null)
+            {
+                continue;
+            }
+            JsonArray? stepsNode = scenarioNode["Steps"]?.AsArray();
+            if (stepsNode == null)
+            {
+                continue;
+            }
+
+            foreach (var stepNode in stepsNode)
+            {
+                if (stepNode == null)
+                    continue;
+                int? stepId = (int?)stepNode["Id"]?.AsValue();
+                if (stepId == null)
+                {
+                    continue;
+                }
+
+                var scenario = scenarious.FirstOrDefault(scr => scr.Id == scenarioId);
+                var step = scenario?.Steps.FirstOrDefault(step => step.Id == stepId);
+                step?.InitializeReferences(ReferenceCreator.CreateReferences(stepNode));
+            }
+
+        }
+        return scenarious;
     }
 
     private static Scenario? CreateScenario(JsonNode? scenarioNode)
