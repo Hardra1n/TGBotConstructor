@@ -10,6 +10,8 @@ public class ResponseHandler
 
     private IEnumerable<BotCommand> _commands;
 
+    private ScenarioRepository _scenarioRepository;
+
     private TelegramAdminRepository _adminRepository;
 
     public ResponseHandler(IChatBot chatBot)
@@ -17,6 +19,7 @@ public class ResponseHandler
         _chatBot = chatBot;
         _commands = CommandCreator.GetBotCommands();
         _adminRepository = Extensions.GetTelegramAdminRepository();
+        _scenarioRepository = new();
     }
 
     public async Task HandleTextMessage(ReceiverInfo receiverInfo, string text)
@@ -25,6 +28,13 @@ public class ResponseHandler
         if (commandToExecute != null)
         {
             await commandToExecute.Call(_chatBot, receiverInfo);
+            return;
+        }
+
+        var reference = _commands.FirstOrDefault(cmd => cmd.GetReferenceByKey(text) != null)?.GetReferenceByKey(text);
+        if (reference != null)
+        {
+            await _scenarioRepository.CallResponseByReference(_chatBot, receiverInfo, reference);
             return;
         }
 

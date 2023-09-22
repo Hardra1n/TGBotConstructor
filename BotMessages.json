@@ -132,7 +132,60 @@
                     }
                 ]
             }
+        },
+        {
+            "Name": "ref",
+            "Description": "Описание команды",
+            "Action": {
+                "Name": "Text",
+                "Value": "Описание которое я буду вам посылать",
+                "Reply": true
+            },
+            "Reference": [
+                {
+                    "Scenario": 1,
+                    "Step": 1,
+                    "CallMethod": "Text",
+                    "CallValue": "Приступить к первому сценарию"
+                },
+                {
+                    "Scenario": 1,
+                    "Step": 2,
+                    "CallMethod": "Text",
+                    "CallValue": "Пропустить первый шаг"
+                }
+            ]
         }
     ],
-    "Scenarious": {}
+    "Scenarious": [
+        {
+            "Id": 1,
+            "Steps": [
+                {
+                    "Id": 1,
+                    "Action": {
+                        "Name": "Text",
+                        "Value": "Это первый шаг сценария",
+                        "Reply": true
+                    }
+                },
+                {
+                    "Id": 2,
+                    "Action": {
+                        "Name": "Text",
+                        "Value": "Второй шаг сценария"
+                    }
+                },
+                {
+                    "Id": 3,
+                    "Action": {
+                        "Name": "Audio",
+                        "FileId": "CQACAgIAAxkBAANhZQg09doq7vM6DX9C2IJjAAHSuhrXAAK6BQACQjopSnc0dpjw2Mg-MAQ",
+                        "Caption": "Рассказ третьего шага сценария",
+                        "Reply": true
+                    }
+                }
+            ]
+        }
+    ]
 }

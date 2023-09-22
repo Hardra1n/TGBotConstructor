@@ -1,7 +1,9 @@
 using System.Text;
 using System.Text.Json.Nodes;
 using ChatBot.Handling.Actions;
+using ChatBot.Handling.References;
 using ChatBot.Model;
+using Telegram.Bot.Types.Enums;
 
 public class CommandCreator
 {
@@ -39,10 +41,13 @@ public class CommandCreator
                 continue;
             }
 
-            commands.Add(new BotCommand(commandName, commandDescription, botAction));
+            var references = ReferenceCreator.CreateReferences(commandNode);
+
+            commands.Add(new BotCommand(commandName, commandDescription, botAction, references));
         }
         return commands;
     }
+
 
     public static BotAction? CreateBotAction(JsonNode actionNode)
     {
