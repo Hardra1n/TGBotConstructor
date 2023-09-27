@@ -5,15 +5,15 @@ namespace ChatBot.Model;
 
 public class BotCommand
 {
-    private BotAction _botAction;
+    private IEnumerable<BotAction> _botActions;
 
     private IEnumerable<Reference> _references;
 
-    public BotCommand(string name, string description, BotAction botAction, IEnumerable<Reference> references)
+    public BotCommand(string name, string description, IEnumerable<BotAction> botActions, IEnumerable<Reference> references)
     {
         Name = name;
         Description = description;
-        _botAction = botAction;
+        _botActions = botActions;
         _references = references;
     }
 
@@ -23,7 +23,10 @@ public class BotCommand
 
     public async Task Call(IChatBot chatBot, ReceiverInfo receiverInfo)
     {
-        await _botAction.Execute(chatBot, receiverInfo);
+        foreach (var action in _botActions)
+        {
+            await action.Execute(chatBot, receiverInfo);
+        }
 
     }
 

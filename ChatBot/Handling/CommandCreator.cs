@@ -25,29 +25,50 @@ public class CommandCreator
 
             var commandName = commandNode["Name"]?.AsValue().ToString();
             var commandDescription = commandNode["Description"]?.AsValue().ToString();
-            var actionNode = commandNode["Action"];
+            var actionsNode = commandNode["Actions"]?.AsArray();
             if (commandName == null || commandName == string.Empty
                 || commandDescription == null || commandDescription == string.Empty
-                || actionNode == null)
+                || actionsNode == null)
             {
                 System.Console.WriteLine("Command must contain not empty 'Name', 'Description', 'Action' properties");
                 continue;
             }
 
-            var botAction = CreateBotAction(actionNode);
-            if (botAction == null)
+            var botActions = CreateBotActions(actionsNode);
+            if (botActions == null)
             {
-                System.Console.WriteLine("Unable to create bot action");
+                System.Console.WriteLine("Unable to create bot actions");
                 continue;
             }
 
             var references = ReferenceCreator.CreateReferences(commandNode);
 
-            commands.Add(new BotCommand(commandName, commandDescription, botAction, references));
+            commands.Add(new BotCommand(commandName, commandDescription, botActions, references));
         }
         return commands;
     }
 
+
+    public static IEnumerable<BotAction>? CreateBotActions(JsonArray actionsNode)
+    {
+        List<BotAction> actions = new();
+        if (actionsNode.Count == 0)
+            return null;
+        foreach (var actionNode in actionsNode)
+        {
+            if (actionNode == null)
+            {
+                System.Console.WriteLine("Unable to interpret action node");
+                continue;
+            }
+
+            var action = CreateBotAction(actionNode);
+            if (action == null)
+                continue;
+            actions.Add(action);
+        }
+        return actions;
+    }
 
     public static BotAction? CreateBotAction(JsonNode actionNode)
     {

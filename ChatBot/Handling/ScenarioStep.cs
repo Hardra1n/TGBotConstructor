@@ -9,14 +9,14 @@ public class ScenarioStep
 {
     public int Id { get; private set; }
 
-    public BotAction Action { get; private set; }
+    public IEnumerable<BotAction> Actions { get; private set; }
 
     public IEnumerable<Reference>? _references = null;
 
-    public ScenarioStep(int id, BotAction action)
+    public ScenarioStep(int id, IEnumerable<BotAction> actions)
     {
         Id = id;
-        Action = action;
+        Actions = actions;
     }
 
     public void InitializeReferences(IEnumerable<Reference> references)
@@ -41,6 +41,9 @@ public class ScenarioStep
 
     public async Task Call(IChatBot chatBot, ReceiverInfo receiverInfo)
     {
-        await Action.Execute(chatBot, receiverInfo);
+        foreach (var action in Actions)
+        {
+            await action.Execute(chatBot, receiverInfo);
+        }
     }
 }

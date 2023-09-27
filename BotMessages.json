@@ -3,144 +3,171 @@
         {
             "Name": "help",
             "Description": "Описание команды",
-            "Action": {
-                "Name": "Text",
-                "Value": "Описание которое я буду вам посылать",
-                "Reply": true
-            }
+            "Actions": [
+                {
+                    "Name": "Text",
+                    "Value": "Вот моя страница в инстагарм: pashas1x",
+                    "Reply": true
+                },
+                {
+                    "Name": "Text",
+                    "Value": "Вот ещё одно сообщение",
+                    "Reply": true
+                }
+            ]
         },
         {
             "Name": "help2",
             "Description": "Описание2",
-            "Action": {}
+            "Actions": []
         },
         {
             "Name": "photo",
             "Description": "Описание3",
-            "Action": {
-                "Name": "Photo",
-                "FileId": "AgACAgIAAxkBAANbZQgiQaF6ZXdF9EXOSYc-ZKuStI0AAsPMMRv1QkBIbRRgiamOnEwBAAMCAANzAAMwBA",
-                "Caption": "Текст к фотографии",
-                "Reply": true
-            }
+            "Actions": [
+                {
+                    "Name": "Photo",
+                    "FileId": "AgACAgIAAxkBAANbZQgiQaF6ZXdF9EXOSYc-ZKuStI0AAsPMMRv1QkBIbRRgiamOnEwBAAMCAANzAAMwBA",
+                    "Caption": "Текст к фотографии",
+                    "Reply": true
+                }
+            ]
         },
         {
             "Name": "audio",
             "Description": "Описание4",
-            "Action": {
-                "Name": "Audio",
-                "FileId": "CQACAgIAAxkBAANhZQg09doq7vM6DX9C2IJjAAHSuhrXAAK6BQACQjopSnc0dpjw2Mg-MAQ",
-                "Caption": "Текст к аудио",
-                "Reply": true
-            }
+            "Actions": [
+                {
+                    "Name": "Audio",
+                    "FileId": "CQACAgIAAxkBAANhZQg09doq7vM6DX9C2IJjAAHSuhrXAAK6BQACQjopSnc0dpjw2Mg-MAQ",
+                    "Caption": "Текст к аудио",
+                    "Reply": true
+                }
+            ]
         },
         {
             "Name": "voice",
             "Description": "Описание5",
-            "Action": {
-                "Name": "Voice",
-                "FileId": "AwACAgIAAxkBAANdZQgi5EbbZbQaXNyp4DC70o6HGa0AAhA6AAJaTkFIiaK9ekk-jIkwBA",
-                "Caption": "Текст к войсу",
-                "Reply": true
-            }
+            "Actions": [
+                {
+                    "Name": "Voice",
+                    "FileId": "AwACAgIAAxkBAANdZQgi5EbbZbQaXNyp4DC70o6HGa0AAhA6AAJaTkFIiaK9ekk-jIkwBA",
+                    "Caption": "Текст к войсу",
+                    "Reply": true
+                }
+            ]
         },
         {
             "Name": "video",
             "Description": "Описание6",
-            "Action": {
-                "Name": "Video",
-                "FileId": "BAACAgIAAxkBAANrZQg6AAHnYXjEl7PM9_C4kr9MUMhtAAKhLwACPW3hSE1HX-x2rclrMAQ",
-                "Caption": "Текст к видео",
-                "Reply": true
-            }
+            "Actions": [
+                {
+                    "Name": "Video",
+                    "FileId": "BAACAgIAAxkBAANrZQg6AAHnYXjEl7PM9_C4kr9MUMhtAAKhLwACPW3hSE1HX-x2rclrMAQ",
+                    "Caption": "Текст к видео",
+                    "Reply": true
+                }
+            ]
         },
         {
             "Name": "videonote",
             "Description": "Описание7",
-            "Action": {
-                "Name": "VideoNote",
-                "FileId": "DQACAgIAAxkBAANwZQg8e9kdCmJgsSD1LgRN2yWFN8kAAtk5AAJaTklIB3WUSNYGp6gwBA",
-                "Reply": true
-            }
+            "Actions": [
+                {
+                    "Name": "VideoNote",
+                    "FileId": "DQACAgIAAxkBAANwZQg8e9kdCmJgsSD1LgRN2yWFN8kAAtk5AAJaTklIB3WUSNYGp6gwBA",
+                    "Reply": true
+                }
+            ]
         },
         {
             "Name": "document",
             "Description": "Описание8",
-            "Action": {
-                "Name": "Document",
-                "FileId": "BQACAgIAAxkBAAN3ZQg-ONpozPAUNoMo1dFj-UOSa_8AAigYAALBvRhLTI1EOzrF2h8wBA",
-                "Caption": "Текст к документу"
-            }
+            "Actions": [
+                {
+                    "Name": "Document",
+                    "FileId": "BQACAgIAAxkBAAN3ZQg-ONpozPAUNoMo1dFj-UOSa_8AAigYAALBvRhLTI1EOzrF2h8wBA",
+                    "Caption": "Текст к документу"
+                }
+            ]
         },
         {
             "Name": "mediaalbum",
             "Description": "Описание9",
-            "Action": {
-                "Name": "Album",
-                "Files": [
-                    {
-                        "Type": "Photo",
-                        "FileId": "AgACAgIAAxkBAANbZQgiQaF6ZXdF9EXOSYc-ZKuStI0AAsPMMRv1QkBIbRRgiamOnEwBAAMCAANzAAMwBA"
-                    },
-                    {
-                        "Type": "Video",
-                        "FileId": "BAACAgIAAxkBAANrZQg6AAHnYXjEl7PM9_C4kr9MUMhtAAKhLwACPW3hSE1HX-x2rclrMAQ"
-                    }
-                ],
-                "Reply": false
-            }
+            "Actions": [
+                {
+                    "Name": "Album",
+                    "Files": [
+                        {
+                            "Type": "Photo",
+                            "FileId": "AgACAgIAAxkBAANbZQgiQaF6ZXdF9EXOSYc-ZKuStI0AAsPMMRv1QkBIbRRgiamOnEwBAAMCAANzAAMwBA"
+                        },
+                        {
+                            "Type": "Video",
+                            "FileId": "BAACAgIAAxkBAANrZQg6AAHnYXjEl7PM9_C4kr9MUMhtAAKhLwACPW3hSE1HX-x2rclrMAQ"
+                        }
+                    ],
+                    "Reply": false
+                }
+            ]
         },
         {
             "Name": "documentalbum",
             "Description": "Описание10",
-            "Action": {
-                "Name": "Album",
-                "Files": [
-                    {
-                        "Type": "Document",
-                        "FileId": "BQACAgIAAxkBAAN3ZQg-ONpozPAUNoMo1dFj-UOSa_8AAigYAALBvRhLTI1EOzrF2h8wBA"
-                    },
-                    {
-                        "Type": "Document",
-                        "FileId": "BQACAgIAAxkBAAN3ZQg-ONpozPAUNoMo1dFj-UOSa_8AAigYAALBvRhLTI1EOzrF2h8wBA"
-                    },
-                    {
-                        "Type": "Document",
-                        "FileId": "BQACAgIAAxkBAAN3ZQg-ONpozPAUNoMo1dFj-UOSa_8AAigYAALBvRhLTI1EOzrF2h8wBA"
-                    }
-                ],
-                "Reply": true
-            }
+            "Actions": [
+                {
+                    "Name": "Album",
+                    "Files": [
+                        {
+                            "Type": "Document",
+                            "FileId": "BQACAgIAAxkBAAN3ZQg-ONpozPAUNoMo1dFj-UOSa_8AAigYAALBvRhLTI1EOzrF2h8wBA"
+                        },
+                        {
+                            "Type": "Document",
+                            "FileId": "BQACAgIAAxkBAAN3ZQg-ONpozPAUNoMo1dFj-UOSa_8AAigYAALBvRhLTI1EOzrF2h8wBA"
+                        },
+                        {
+                            "Type": "Document",
+                            "FileId": "BQACAgIAAxkBAAN3ZQg-ONpozPAUNoMo1dFj-UOSa_8AAigYAALBvRhLTI1EOzrF2h8wBA"
+                        }
+                    ],
+                    "Reply": true
+                }
+            ]
         },
         {
             "Name": "audioalbum",
             "Description": "Описание11",
-            "Action": {
-                "Name": "Album",
-                "Files": [
-                    {
-                        "Type": "Audio",
-                        "FileId": "CQACAgIAAxkBAANhZQg09doq7vM6DX9C2IJjAAHSuhrXAAK6BQACQjopSnc0dpjw2Mg-MAQ"
-                    },
-                    {
-                        "Type": "Audio",
-                        "FileId": "CQACAgIAAxkBAANhZQg09doq7vM6DX9C2IJjAAHSuhrXAAK6BQACQjopSnc0dpjw2Mg-MAQ"
-                    },
-                    {
-                        "Type": "Audio",
-                        "FileId": "CQACAgIAAxkBAANhZQg09doq7vM6DX9C2IJjAAHSuhrXAAK6BQACQjopSnc0dpjw2Mg-MAQ"
-                    }
-                ]
-            }
+            "Actions": [
+                {
+                    "Name": "Album",
+                    "Files": [
+                        {
+                            "Type": "Audio",
+                            "FileId": "CQACAgIAAxkBAANhZQg09doq7vM6DX9C2IJjAAHSuhrXAAK6BQACQjopSnc0dpjw2Mg-MAQ"
+                        },
+                        {
+                            "Type": "Audio",
+                            "FileId": "CQACAgIAAxkBAANhZQg09doq7vM6DX9C2IJjAAHSuhrXAAK6BQACQjopSnc0dpjw2Mg-MAQ"
+                        },
+                        {
+                            "Type": "Audio",
+                            "FileId": "CQACAgIAAxkBAANhZQg09doq7vM6DX9C2IJjAAHSuhrXAAK6BQACQjopSnc0dpjw2Mg-MAQ"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "Name": "ref",
             "Description": "Описание команды",
-            "Action": {
-                "Name": "Text",
-                "Value": "Для того чтобы перейти на первый шаг первого сценарция введите: 'Приступить к первому сценарию', для второго шага введите 'Пропустить первый шаг'",
-                "Reply": true
-            },
+            "Actions": [
+                {
+                    "Name": "Text",
+                    "Value": "Для того чтобы перейти на первый шаг первого сценарция введите: 'Приступить к первому сценарию', для второго шага введите 'Пропустить первый шаг'",
+                    "Reply": false
+                }
+            ],
             "Reference": [
                 {
                     "Scenario": 1,
@@ -163,11 +190,17 @@
             "Steps": [
                 {
                     "Id": 1,
-                    "Action": {
-                        "Name": "Text",
-                        "Value": "Это первый шаг сценария. Чтобы перейти на второй шаг введите 'Переведи меня на второй шаг'",
-                        "Reply": true
-                    },
+                    "Actions": [
+                        {
+                            "Name": "Text",
+                            "Value": "Это первый шаг сценария",
+                            "Reply": true
+                        },
+                        {
+                            "Name": "Text",
+                            "Value": "Чтобы перейти на второй шаг введите 'Переведи меня на второй шаг'"
+                        }
+                    ],
                     "Reference": [
                         {
                             "Scenario": 1,
@@ -179,10 +212,12 @@
                 },
                 {
                     "Id": 2,
-                    "Action": {
-                        "Name": "Text",
-                        "Value": "Второй шаг сценария. Чтобы перейти на 3-й шаг введите: 'Дальше'"
-                    },
+                    "Actions": [
+                        {
+                            "Name": "Text",
+                            "Value": "Второй шаг сценария. Чтобы перейти на 3-й шаг введите: 'Дальше'"
+                        }
+                    ],
                     "Reference": [
                         {
                             "Scenario": 1,
@@ -194,12 +229,14 @@
                 },
                 {
                     "Id": 3,
-                    "Action": {
-                        "Name": "Audio",
-                        "FileId": "CQACAgIAAxkBAANhZQg09doq7vM6DX9C2IJjAAHSuhrXAAK6BQACQjopSnc0dpjw2Mg-MAQ",
-                        "Caption": "Рассказ третьего шага сценария, если хотите вернуться, введите: 'вернуться на второй'",
-                        "Reply": true
-                    },
+                    "Actions": [
+                        {
+                            "Name": "Audio",
+                            "FileId": "CQACAgIAAxkBAANhZQg09doq7vM6DX9C2IJjAAHSuhrXAAK6BQACQjopSnc0dpjw2Mg-MAQ",
+                            "Caption": "Рассказ третьего шага сценария, если хотите вернуться, введите: 'вернуться на второй'",
+                            "Reply": true
+                        }
+                    ],
                     "Reference": [
                         {
                             "Scenario": 1,

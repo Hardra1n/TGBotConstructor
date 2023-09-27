@@ -100,13 +100,13 @@ public static class ScenarioCreator
             System.Console.WriteLine("Step property must contain 'Id' property");
             return null;
         }
-        JsonNode? actionNode = stepNode["Action"];
+        JsonArray? actionNode = stepNode["Actions"]?.AsArray();
         if (actionNode == null)
         {
             System.Console.WriteLine("Step property must contain 'Action' property");
             return null;
         }
-        BotAction? botAction = CommandCreator.CreateBotAction(actionNode);
+        IEnumerable<BotAction>? botAction = CommandCreator.CreateBotActions(actionNode);
         if (botAction == null)
         {
             System.Console.WriteLine("Unable to create scenario step. Bot action is wrong.");
