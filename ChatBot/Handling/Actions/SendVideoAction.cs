@@ -1,7 +1,7 @@
 using ChatBot.Handling.Actions;
 using ChatBot.Model;
 
-public class SendVideoAction : BotAction
+public class SendVideoAction : SendBotAction
 {
     private readonly string _fileId;
     private readonly string? _caption;

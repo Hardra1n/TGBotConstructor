@@ -6,8 +6,12 @@
             "Actions": [
                 {
                     "Name": "Text",
-                    "Value": "Вот моя страница в инстагарм: pashas1x",
+                    "Value": "Через 5 секунд появиться ещё одно сообщение",
                     "Reply": true
+                },
+                {
+                    "Name": "Wait",
+                    "Value": "10 s"
                 },
                 {
                     "Name": "Text",
@@ -195,6 +199,10 @@
                             "Name": "Text",
                             "Value": "Это первый шаг сценария",
                             "Reply": true
+                        },
+                        {
+                            "Name": "Wait",
+                            "Value": "30 s"
                         },
                         {
                             "Name": "Text",

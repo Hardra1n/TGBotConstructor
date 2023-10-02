@@ -105,6 +105,9 @@ public class CommandCreator
             case "Album":
                 botAction = CreateAlbumAction(actionNode);
                 break;
+            case "Wait":
+                botAction = CreateWaitAction(actionNode);
+                break;
             default:
                 botAction = null;
                 break;
@@ -115,6 +118,72 @@ public class CommandCreator
             return null;
         }
         return botAction;
+    }
+
+    private static WaitAction? CreateWaitAction(JsonNode jsonNode)
+    {
+        var valueProperty = jsonNode["Value"]?.AsValue().ToString();
+        if (valueProperty == null)
+        {
+            System.Console.WriteLine("Invalid 'Value property in 'Wait' action");
+            return null;
+        }
+        if (valueProperty == null || valueProperty == string.Empty)
+            return null;
+        const string daysIndicator = "d";
+        int daysAmount = 0;
+        const string hoursIndicator = "h";
+        int hoursAmount = 0;
+        const string minutesIndicator = "m";
+        int minutesAmount = 0;
+        const string secondsIndicator = "s";
+        int secondsAmount = 0;
+        List<string> timeIndicators = new() { daysIndicator, hoursIndicator, minutesIndicator, secondsIndicator };
+
+        string[] strings = valueProperty.Split(' ');
+        if (strings.Count() == 0 || strings.Count() > timeIndicators.Count() * 2 || strings.Count() % 2 != 0)
+        {
+            System.Console.WriteLine("Invalid string");
+            return null;
+        }
+        for (int i = 0; i < strings.Count(); i += 2)
+        {
+
+            if (!int.TryParse(strings[i], out int timeAmount) || timeAmount < 0)
+            {
+                System.Console.WriteLine($"Unable to convert {i} sequence to integer");
+                return null;
+            }
+            if (!timeIndicators.Contains(strings[i + 1]))
+            {
+                System.Console.WriteLine($"Unable to convert {i + 1} sequence to time indicators");
+                return null;
+            }
+
+            switch (strings[i + 1])
+            {
+                case daysIndicator:
+                    daysAmount = timeAmount;
+                    timeIndicators.Remove(daysIndicator);
+                    break;
+                case hoursIndicator:
+                    hoursAmount = timeAmount;
+                    timeIndicators.Remove(hoursIndicator);
+                    break;
+                case minutesIndicator:
+                    minutesAmount = timeAmount;
+                    timeIndicators.Remove(minutesIndicator);
+                    break;
+                case secondsIndicator:
+                    secondsAmount = timeAmount;
+                    timeIndicators.Remove(secondsIndicator);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return new WaitAction(new TimeSpan(daysAmount, hoursAmount, minutesAmount, secondsAmount));
     }
 
     private static SendAlbumAction? CreateAlbumAction(JsonNode jsonNode)

@@ -2,7 +2,7 @@ using ChatBot.Model;
 
 namespace ChatBot.Handling.Actions;
 
-public class SendAlbumAction : BotAction
+public class SendAlbumAction : SendBotAction
 {
     private IEnumerable<KeyValuePair<string, string>> _typeFileIdPairs;
 

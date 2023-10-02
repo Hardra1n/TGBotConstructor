@@ -2,7 +2,7 @@ using ChatBot.Model;
 
 namespace ChatBot.Handling.Actions;
 
-public class SendDocumentAction : BotAction
+public class SendDocumentAction : SendBotAction
 {
     private readonly string _fileId;
     private readonly string? _caption;

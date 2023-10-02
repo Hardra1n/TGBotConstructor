@@ -2,7 +2,7 @@ using ChatBot.Model;
 
 namespace ChatBot.Handling.Actions;
 
-public class SendVideoNoteAction : BotAction
+public class SendVideoNoteAction : SendBotAction
 {
     private readonly string _fileId;
 

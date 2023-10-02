@@ -1,7 +1,7 @@
 using ChatBot.Handling.Actions;
 using ChatBot.Model;
 
-public class SendTextBotAction : BotAction
+public class SendTextBotAction : SendBotAction
 {
     private readonly string _text;
 
