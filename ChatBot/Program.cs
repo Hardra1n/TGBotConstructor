@@ -20,6 +20,7 @@ internal class Program
 
         Console.WriteLine("Bot was started");
         Console.ReadLine();
+        (chatBot as TelegramBot)!.Dispose();
         cts.Cancel();
     }
 }

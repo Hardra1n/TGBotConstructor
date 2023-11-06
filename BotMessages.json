@@ -26,18 +26,6 @@
             "Actions": []
         },
         {
-            "Name": "photo",
-            "Description": "Описание3",
-            "Actions": [
-                {
-                    "Name": "Photo",
-                    "FileId": "AgACAgIAAxkBAANbZQgiQaF6ZXdF9EXOSYc-ZKuStI0AAsPMMRv1QkBIbRRgiamOnEwBAAMCAANzAAMwBA",
-                    "Caption": "Текст к фотографии",
-                    "Reply": true
-                }
-            ]
-        },
-        {
             "Name": "audio",
             "Description": "Описание4",
             "Actions": [
@@ -202,7 +190,7 @@
                         },
                         {
                             "Name": "Wait",
-                            "Value": "30 s"
+                            "Value": "10 s"
                         },
                         {
                             "Name": "Text",
@@ -239,9 +227,8 @@
                     "Id": 3,
                     "Actions": [
                         {
-                            "Name": "Audio",
-                            "FileId": "CQACAgIAAxkBAANhZQg09doq7vM6DX9C2IJjAAHSuhrXAAK6BQACQjopSnc0dpjw2Mg-MAQ",
-                            "Caption": "Рассказ третьего шага сценария, если хотите вернуться, введите: 'вернуться на второй'",
+                            "Name": "Text",
+                            "Value": "Спасибо, мы закончили, можете вернуться на второй шаг, введя 'Вернуться на второй'",
                             "Reply": true
                         }
                     ],

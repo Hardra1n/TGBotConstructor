@@ -6,7 +6,7 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 
 namespace ChatBot.Model.Telegram;
-public class TelegramBot : IChatBot
+public class TelegramBot : IChatBot, IDisposable
 {
     private TelegramBotClient _client;
 
@@ -22,6 +22,11 @@ public class TelegramBot : IChatBot
         if (configuration.Description != _client.GetMyDescriptionAsync().Result.Description)
             _client.SetMyDescriptionAsync(configuration.Description).Wait();
         _handler = new ResponseHandler(this);
+    }
+
+    public void Dispose()
+    {
+        _handler.Dispose();
     }
 
     public async Task SendAlbumMessage(ReceiverInfo receiverInfo, IEnumerable<KeyValuePair<string, string>> typeFileIdPairs, bool isReply)

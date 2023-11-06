@@ -4,7 +4,7 @@ using Telegram.Bot.Polling;
 
 namespace ChatBot.Handling;
 
-public class ResponseHandler
+public class ResponseHandler : IDisposable
 {
     private IChatBot _chatBot;
 
@@ -60,5 +60,10 @@ public class ResponseHandler
         {
             await _chatBot.SendTextMessage(receiverInfo, $"This File Id: \"{fileId}\"", true);
         }
+    }
+
+    public void Dispose()
+    {
+        _userStateRepository.Dispose();
     }
 }

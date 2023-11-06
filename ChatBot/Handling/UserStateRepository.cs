@@ -1,13 +1,20 @@
 using ChatBot.Model;
-using Telegram.Bot.Types;
+using LiteDB;
+using ChatBot.Data;
 
-public class UserStateRepository
+public class UserStateRepository : IDisposable
 {
-    private Dictionary<long, UserState> userStates = new Dictionary<long, UserState>();
+    private IDictionary<long, UserState> userStates = new Dictionary<long, UserState>();
 
     public UserStateRepository()
     {
 
+        userStates = DBExtensions.GetUserStatesFromDB();
+    }
+
+    public void Dispose()
+    {
+        DBExtensions.UpdateUsers(userStates.Select(state => new User(state.Key, state.Value.ScenarioId, state.Value.StepId)));
     }
 
     public UserState GetOrCreate(long id)
